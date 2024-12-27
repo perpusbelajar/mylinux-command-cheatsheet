@@ -20,3 +20,8 @@ Vi Editor most used by anta
 19. v >> masuk ke visual mode untuk pilih text atau string kemudian bisa dikombinasikan dengan CTRL + v untuk menuju baris awal dari semua text yang diblok
 20. d >> untuk delete semua selected text dari mode visual
 21. y >> untuk copy semua selected string dari visual mode dan p untuk paste
+22. :ns/^/# >> untuk melakukan insert string "#" pada awal line untuk nilain n bisa diganti nomor line misal mau ganti line 5 n dapat diganti dengan 5
+23. :%s/^/#/ >> untuk melaukan insert string "#" pada awal line disemua baris yang ada
+24. :1,5s/^/#/ >> untuk melakujan insert string "#" pada awal line di line nomor 1 sampai 5
+25. :set number >> untuk menampilkan number line
+26. : set nonumber >> untuk tidak menampilkan line number
