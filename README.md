@@ -1,2 +1,2 @@
 # mylinux-command-cheatsheet
-Just random commanf that i used
+Just random command that i used
