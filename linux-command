@@ -17,3 +17,6 @@ Vi Editor most used by anta
 16. /text >> untuk melakukan pencarian kata "text" kemudian untuk melakukan next pencarin ketik n
 17. :%s/tect/text/g >> melakukan replace untuk string ""tect" menjadi "text" pada semua line tambahkan /gc untuk melakukan replace dengan confirmasi terlebih dahulu
 18. :s/tect/text/g >> melakukan replace untuk string ""tect" menjadi "text" pada current line
+19. v >> masuk ke visual mode untuk pilih text atau string kemudian bisa dikombinasikan dengan CTRL + v untuk menuju baris awal dari semua text yang diblok
+20. d >> untuk delete semua selected text dari mode visual
+21. y >> untuk copy semua selected string dari visual mode dan p untuk paste
