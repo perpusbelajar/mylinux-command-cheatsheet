@@ -1,0 +1,19 @@
+Vi Editor most used by anta
+1. Insert mode >> i, a, biasanya saya menggunakan ini untuk insert misal ingin mengetik atau insert string pada text
+2. 0 (nol) >> saya gunakan untuk menuju pada awal line dimana kursor saya berada
+3. $ (dollar) >> saya gunakan untuk menuju pada akhir line dimana kursor saya berada
+4. gg >> untuk menuju pada awal file
+5. G >> untuk menuju pada akhir dari file
+6. :n >> menuju pada line tertentu sesuai dengan nilai n misal baris ke 54 jadi :54 n=54
+7. o >> untuk melakukan insert pada baris baru dibawah kursor berada
+8. O >> untuk melakukan insert pada baris baru diatas kursor berada
+9. d$ >> untuk hapus semua karater setelah kursor pada satu line
+10. dd >> delete currnet line 
+11. yy >> copy current line
+12. yw >> copy satu word/kata
+13. p >> paste hasil copy
+14. u >> untuk undo
+15. CTRL + r >> untuk redo
+16. /text >> untuk melakukan pencarian kata "text" kemudian untuk melakukan next pencarin ketik n
+17. :%s/tect/text/g >> melakukan replace untuk string ""tect" menjadi "text" pada semua line tambahkan /gc untuk melakukan replace dengan confirmasi terlebih dahulu
+18. :s/tect/text/g >> melakukan replace untuk string ""tect" menjadi "text" pada current line
