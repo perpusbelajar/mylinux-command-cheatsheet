@@ -1,0 +1,119 @@
+#!/bin/bash
+
+# Function to get available zones
+get_zones() {
+    # Get the list of available zones
+    ZONES=$(sudo firewall-cmd --get-zones)
+    echo "$ZONES"
+}
+
+# Function to add a service to a selected zone
+add_service() {
+    # Ask user to select a zone
+    echo "Available zones:"
+    ZONES=$(get_zones)
+    echo "$ZONES"
+    echo "Enter the zone to add the service to:"
+    read ZONE
+
+    if [[ ! "$ZONES" =~ "$ZONE" ]]; then
+        echo "Invalid zone entered, aborting!"
+        return
+    fi
+
+    # Ask user for service name
+    echo "Enter the service name (e.g., http, https, ssh):"
+    read SERVICE
+
+    if [ -z "$SERVICE" ]; then
+        echo "No service entered, aborting!"
+        return
+    fi
+
+    # Add the service to the selected zone (permanent)
+    sudo firewall-cmd --zone="$ZONE" --add-service="$SERVICE" --permanent
+    if [ $? -eq 0 ]; then
+        echo "Service '$SERVICE' added successfully to zone '$ZONE'!"
+    else
+        echo "Failed to add service '$SERVICE' to zone '$ZONE'!"
+    fi
+}
+
+# Function to add a port with optional source to a selected zone
+add_port_with_source() {
+    # Ask user to select a zone
+    echo "Available zones:"
+    ZONES=$(get_zones)
+    echo "$ZONES"
+    echo "Enter the zone to add the port and source to:"
+    read ZONE
+
+    if [[ ! "$ZONES" =~ "$ZONE" ]]; then
+        echo "Invalid zone entered, aborting!"
+        return
+    fi
+
+    # Ask user for port and protocol
+    echo "Enter the port number (e.g., 8080):"
+    read PORT
+    echo "Enter the protocol (tcp/udp):"
+    read PROTOCOL
+
+    if [ -z "$PORT" ] || [ -z "$PROTOCOL" ]; then
+        echo "Port or protocol not entered, aborting!"
+        return
+    fi
+
+    # Ask user for source IP or network (optional)
+    echo "Enter the source IP or network (optional, e.g., 192.168.1.100 or 192.168.1.0/24):"
+    read SOURCE
+
+    # Add the port to the selected zone (permanent)
+    sudo firewall-cmd --zone="$ZONE" --add-port="$PORT/$PROTOCOL" --permanent
+    if [ $? -eq 0 ]; then
+        echo "Port $PORT/$PROTOCOL added successfully to zone '$ZONE'!"
+    else
+        echo "Failed to add port $PORT/$PROTOCOL to zone '$ZONE'!"
+    fi
+
+    # If a source is provided, allow it in the firewall for the selected zone
+    if [ ! -z "$SOURCE" ]; then
+        sudo firewall-cmd --zone="$ZONE" --add-source="$SOURCE" --permanent
+        if [ $? -eq 0 ]; then
+            echo "Source '$SOURCE' added successfully to zone '$ZONE'!"
+        else
+            echo "Failed to add source '$SOURCE' to zone '$ZONE'!"
+        fi
+    fi
+}
+
+# Main menu function
+main_menu() {
+    echo "Firewall Configuration Menu"
+    echo "1. Add Service"
+    echo "2. Add Port and Source"
+    echo "3. Exit"
+    echo "Choose an option (1-3):"
+    read CHOICE
+
+    case $CHOICE in
+        1)
+            add_service
+            ;;
+        2)
+            add_port_with_source
+            ;;
+        3)
+            echo "Exiting..."
+            exit 0
+            ;;
+        *)
+            echo "Invalid choice, please try again."
+            ;;
+    esac
+}
+
+# Main loop
+while true; do
+    main_menu
+done
