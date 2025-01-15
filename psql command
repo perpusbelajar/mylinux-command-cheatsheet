@@ -1,0 +1,12 @@
+1. backup database in plain sql >>  pg_dump -U postgres -d dvdrental -F p -f /var/lib/postgresql/bckp.sql
+2. restore database in plain sql >> psql -U anta -d test -f bckp.sql
+3. backup database in custom format >> pg_dump -U anta -d test -F c -f /var/lib/postgresql/test.sql
+4. restore database in custom format >> pg_restore -U anta -d restore_test test.sql
+
+
+
+INSTALL PGAGENT 
+1. pgagent hostaddr=127.0.0.1 port=5432 dbname=test user=anta password='testing' -s /var/log/pgagent/pgagent.log
+2. psql -U anta -d test -f /usr/share/postgresql/16/extension/pgagent--4.2.sql
+3. ps -ef |grep pgagent
+
