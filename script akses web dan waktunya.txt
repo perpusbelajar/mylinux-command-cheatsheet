@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# URL yang akan diuji
+URL="http://74.176.53.128:32081/error"
+
+# Menampilkan waktu saat akses dilakukan dalam WIB (UTC+7)
+echo "Akses dilakukan pada: $(TZ='Asia/Jakarta' date '+%Y-%m-%d %H:%M:%S.%3N')"
+
+# Melakukan request dengan curl
+curl -o /dev/null -s $URL
